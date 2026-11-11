@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZL PEUFS – Smoke Different</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#020203;
+  --card:#0a0b0f;
+  --accent:#b066ff;
+  --accent2:#7c3aed;
+  --whatsapp:#25D366;
+  --text:#ffffff;
+  --muted:#9499ab;
+  --glow:rgba(176,102,255,0.45);
+  --font-en: 'Outfit', sans-serif;
+  --font-ar: 'Cairo', sans-serif;
+}
+*{box-sizing:border-box;transition:all .3s cubic-bezier(.4,0,.2,1)}
+body{
+  margin:0;
+  font-family:var(--font-ar);
+  background:#020203;
+  background-image:
+    radial-gradient(circle at 80% 0%, rgba(124,58,237,0.18) 0%, transparent 40%),
+    radial-gradient(circle at 20% 90%, rgba(176,102,255,0.15) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, #0a0514 0%, #020203 90%);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+  position:relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent 45%, rgba(176, 102, 255, 0.04) 50%, transparent 55%);
+  background-size: 60px 60px;
+  animation: laserScan 12s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes laserScan {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(50px) rotate(360deg); }
+}
+
+.en, h1, h2, .btn, .product-name, .price, footer, label { font-family: var(--font-en); }
+
+.zl-brand-logo{
+  width:52px; height:52px; background:#000;
+  border:1.5px solid rgba(176,102,255,0.4); border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; box-shadow: 0 0 25px rgba(176,102,255,0.4), inset 0 0 10px rgba(124,58,237,0.3);
+  animation: logoPulse 3s infinite alternate;
+}
+@keyframes logoPulse {
+  0% { box-shadow: 0 0 15px rgba(176,102,255,0.3); }
+  100% { box-shadow: 0 0 35px rgba(176,102,255,0.7), inset 0 0 15px rgba(176,102,255,0.5); }
+}
+.zl-brand-logo::before {
+  content: "PEUF"; position: absolute; top: -9px; right: -4px;
+  font-size: 8px; font-weight: 900; color: var(--accent); letter-spacing: 2px;
+  text-shadow: 0 0 8px var(--accent);
+}
+.zl-text { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -1.5px; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+
+#welcomeModal{
+  position:fixed; inset:0; background:rgba(2,2,3,0.96); backdrop-filter:blur(25px); z-index:9999;
+  display:flex; align-items:center; justify-content:center;
+}
+#welcomeModal.hide{opacity:0;visibility:hidden;pointer-events:none}
+.modal-content{
+  text-align:center; max-width:380px; width:90%;
+  background:linear-gradient(135deg, rgba(15,11,26,0.95), rgba(5,6,8,0.98));
+  border:1px solid rgba(176,102,255,0.3); border-radius:30px; padding:40px 30px;
+  box-shadow: 0 0 60px rgba(124,58,237,0.5);
+}
+.modal-logo-zl{
+  width:100px; height:100px; background:#000; border:2px solid rgba(176,102,255,0.5);
+  border-radius:24px; margin:0 auto 24px; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 0 40px rgba(176,102,255,0.6);
+}
+.modal-logo-zl span{font-size:48px;font-weight:900;color:#fff;text-shadow:0 0 15px #b066ff}
+
+header{
+  position:sticky; top:0; background:rgba(2,2,3,0.88); backdrop-filter:blur(15px);
+  border-bottom:1px solid rgba(176,102,255,0.15); z-index:100; box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.nav{ max-width:1200px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; }
+.brand{display:flex;align-items:center;gap:14px;cursor:pointer}
+.brand h1{margin:0;font-size:22px;font-weight:900;color:#fff;text-shadow:0 0 10px rgba(176,102,255,0.4)}
+nav{display:flex;align-items:center;gap:15px}
+nav a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600;opacity:.85}
+nav a:hover{opacity:1;color:var(--accent);text-shadow:0 0 10px var(--accent)}
+
+.hero{ max-width:1200px; margin:50px auto 40px; padding:0 20px; text-align:center; position:relative; z-index:2; }
+.hero h2{font-size:46px;font-weight:900;margin:0 0 10px;color:#fff;text-shadow:0 0 20px rgba(176,102,255,0.3)}
+.hero p{font-size:18px;color:var(--muted);max-width:600px;margin:0 auto 25px}
+
+.original-badge{
+  display:inline-flex; padding:8px 20px; background:rgba(37,211,102,0.12); color:#25D366;
+  border-radius:99px; font-weight:800; font-size:15px; margin-bottom:20px;
+  border:1px solid rgba(37,211,102,0.3); box-shadow: 0 0 20px rgba(37,211,102,0.2);
+}
+
+.section{max-width:1200px;margin:50px auto;padding:0 20px;position:relative;z-index:2}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:30px}
+
+.product{
+  background:var(--card); border-radius:28px; border:1px solid rgba(176,102,255,0.15);
+  overflow:hidden; position:relative; display:flex; flex-direction:column; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.product:hover{ border-color:rgba(176,102,255,0.5); transform:translateY(-8px); box-shadow:0 20px 60px rgba(124,58,237,0.35); }
+.product::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.8;
+}
+
+/* Slider for CUBA Flavors */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: #000;
+  cursor: zoom-in;
+}
+.slider-track {
+  display: flex;
+  width: 400%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+.slide-img {
+  width: 25%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: 1px solid rgba(176,102,255,0.4);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: grid; place-items:center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 16px;
+  font-weight: bold;
+}
+.slider-btn:hover { background: var(--accent); color: #000; }
+.slider-prev { right: 10px; }
+.slider-next { left: 10px; }
+
+.slider-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 10;
+}
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+}
+.dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+
+.product-img-wrapper { position: relative; overflow: hidden; cursor: zoom-in; }
+.product img{ width:100%; height:280px; object-fit:cover; filter:contrast(1.06) brightness(1.06); }
+.zoom-hint {
+  position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8); color: #fff;
+  padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; backdrop-filter: blur(5px);
+  border: 1px solid rgba(176,102,255,0.3); box-shadow: 0 0 10px rgba(176,102,255,0.3);
+}
+
+.pbody{padding:24px;text-align:right;display:flex;flex-direction:column;flex:1}
+.product-name{font-size:22px;font-weight:800;margin:0 0 5px;color:#fff;text-shadow:0 0 8px rgba(255,255,255,0.3)}
+.product-desc{font-size:14px;color:var(--muted);margin-bottom:15px;line-height:1.5}
+.price{font-size:20px;font-weight:900;color:var(--accent);margin-bottom:15px;text-shadow:0 0 10px rgba(176,102,255,0.4)}
+
+.order-group{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+.btn-choice{
+  width:100%; padding:12px; border-radius:14px; font-weight:800; font-family:var(--font-en);
+  text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center;
+  gap:8px; cursor:pointer; font-size:14px; letter-spacing:1px; position:relative;
+}
+.btn-gros{
+  background:rgba(255,255,255,0.02); border:1.5px solid rgba(176,102,255,0.3); color:#fff;
+  box-shadow: 0 0 15px rgba(176,102,255,0.15);
+}
+.btn-gros:hover{background:var(--accent);color:#000;border-color:var(--accent);box-shadow: 0 0 25px var(--accent)}
+.btn-detail{
+  background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; border:none;
+  box-shadow: 0 0 20px rgba(176,102,255,0.4);
+}
+.btn-detail:hover{filter:brightness(1.15);box-shadow: 0 0 30px rgba(176,102,255,0.7)}
+
+.whatsapp-main{
+  background:var(--whatsapp); color:#fff; padding:16px 32px; border-radius:18px; font-weight:900;
+  text-decoration:none; display:inline-flex; align-items:center; gap:12px; font-size:18px;
+  box-shadow:0 0 30px rgba(37,211,102,0.4); border:none; cursor:pointer;
+}
+.whatsapp-main:hover{ box-shadow:0 0 45px rgba(37,211,102,0.7); transform:translateY(-2px); }
+
+#zoomModal {
+  position: fixed; inset: 0; background: rgba(2,2,3,0.96); backdrop-filter:blur(20px);
+  z-index: 10000; display: none; align-items: center; justify-content: center; cursor: zoom-out;
+}
+#zoomModal img {
+  max-width: 90%; max-height: 90%; border-radius: 20px;
+  box-shadow: 0 0 60px rgba(176,102,255,0.5); border: 1px solid rgba(176,102,255,0.3);
+}
+
+.form-card {
+  background: var(--card); border: 1px solid rgba(176,102,255,0.25); border-radius: 28px;
+  padding: 35px; max-width: 650px; margin: 0 auto; box-shadow: 0 15px 50px rgba(0,0,0,0.6);
+}
+.form-title { font-size: 24px; font-weight: 800; margin-bottom: 25px; text-align: center; color: #fff; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; text-align: right; }
+.form-group.full { grid-column: span 2; }
+.form-group label { font-size: 13px; color: var(--muted); font-weight: 700; }
+.form-control {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(176,102,255,0.2); border-radius: 12px;
+  padding: 14px; color: #fff; font-family: var(--font-ar); font-size: 15px; outline: none;
+}
+.form-control:focus { border-color: var(--accent); }
+select.form-control option { background: #111; color: #fff; }
+
+footer{padding:60px 0;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid rgba(176,102,255,0.15);position:relative;z-index:2}
+
+@media(max-width:768px){
+  .hero h2{font-size:36px}
+  .products{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:span 1}
+}
+</style>
+</head>
+<body>
+
+<div id="zoomModal" onclick="closeZoom()">
+  <img src="" id="zoomedImg">
+</div>
+
+<div id="welcomeModal">
+  <div class="modal-content">
+    <div class="modal-logo-zl"><span>ZL</span></div>
+    <div style="font-family:var(--font-en);font-size:28px;font-weight:900;color:#fff;margin-bottom:8px;text-shadow:0 0 15px #b066ff">ZL PEUFS</div>
+    <div style="color:var(--muted);font-size:14px;margin-bottom:30px">💎 100% ORIGINAL QUALITY ONLY 💎</div>
+    <button class="whatsapp-main" style="width:100%;justify-content:center" onclick="dismissModal()">ENTRER / دخول</button>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <div class="brand" onclick="window.location.href='#home'">
+      <div class="zl-brand-logo"><span class="zl-text">ZL</span></div>
+      <div style="text-align:right">
+        <h1 class="en">ZL PEUFS</h1>
+        <div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px">ORIGINAL STORE</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#orderForm" class="en" style="color:var(--accent)">ORDER FORM</a>
+      <a href="https://wa.me/213696369740" target="_blank" class="en" style="color:var(--whatsapp)">WHATSAPP</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="original-badge en">✓ 100% ORIGINAL PRODUCTS</div>
+  <h2>مرحبا بيك في ZL PEUFF ET SNUS</h2>
+  <p>سلعة 100% اصلية لتضمن بيها صحتك و متعك مع امكانيات توصيل 58 ولاية.</p>
+  <a href="#orderForm" class="whatsapp-main en">FILL ORDER FORM / عمّر معلومات الطلب</a>
+</section>
+
+<section class="section">
+  <div class="products">
+
+    <!-- RandM Pro Tornado 120K -->
+    <div class="product">
+      <div class="product-img-wrapper" onclick="openZoom('peuf torando 120k 4 gout.jpg')">
+        <img src="peuf torando 120k 4 gout.jpg" alt="RandM 120K">
+        <span class="zoom-hint en">🔍 Zoom</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">RandM Pro Tornado 120K</p>
+        <p class="price">3,500 DA</p>
+        <p class="product-desc">120,000 Puffs – Device 4 in 1 (4 Flavors in 1 device). (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('RandM Pro Tornado 120K', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('RandM Pro Tornado 120K', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUBA Nicotine Pouches with Flavor Slider (4 Flavors) -->
+    <div class="product">
+      <div class="slider-container" id="cubaSlider">
+        <div class="slider-track" id="cubaTrack">
+          <img class="slide-img" src="cuba peufe.jpg" alt="Black Currant">
+          <img class="slide-img" src="cuba forest berries-cf3d6ff2.jpg" alt="Forest Berries">
+          <img class="slide-img" src="cuba peach.jpg" alt="Peach">
+          <img class="slide-img" src="cuba black currant-019ffc7a.jpg" alt="Black Currant 2">
+        </div>
+        <button class="slider-btn slider-prev" onclick="moveSlide(-1, event)">‹</button>
+        <button class="slider-btn slider-next" onclick="moveSlide(1, event)">›</button>
+        <div class="slider-dots" id="cubaDots">
+          <span class="dot active" onclick="currentSlide(0, event)"></span>
+          <span class="dot" onclick="currentSlide(1, event)"></span>
+          <span class="dot" onclick="currentSlide(2, event)"></span>
+          <span class="dot" onclick="currentSlide(3, event)"></span>
+        </div>
+        <span class="zoom-hint en" style="bottom:35px">◀ Swipe / Click 4 Flavors ▶</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">CUBA Nicotine Pouches</p>
+        <p class="price">1,400 DA</p>
+        <p class="product-desc">Flavors: Black Currant, Forest Berries, Peach, Apple Juice. (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('CUBA Nicotine Pouches', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('CUBA Nicotine Pouches', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JNR Lila Kiss 60K -->
+    <div class="product">
+      <div class="product-img-wrapper" onclick="openZoom('peuf jnr 60k 4400da.jpg')">
+        <img src="peuf jnr 60k 4400da.jpg" alt="JNR 60K">
+        <span class="zoom-hint en">🔍 Zoom</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">JNR Lila Kiss 60K</p>
+        <p class="price">4,400 DA</p>
+        <p class="product-desc">60,000 Puffs – Screen & Dual Coil. (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('JNR Lila Kiss 60K', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('JNR Lila Kiss 60K', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JNR Lion King 30K -->
+    <div class="product">
+      <div class="product-img-wrapper" onclick="openZoom('peufs.webp')">
+        <img src="peufs.webp" alt="JNR Lion King">
+        <span class="zoom-hint en">🔍 Zoom</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">JNR Lion King 30K</p>
+        <p class="price">3,500 DA</p>
+        <p class="product-desc">Premium Quality – Smooth Lion King Series. (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('JNR Lion King 30K', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('JNR Lion King 30K', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crown Bar 60K -->
+    <div class="product">
+      <div class="product-img-wrapper" onclick="openZoom('peuf crown bar 4800da.jpg')">
+        <img src="peuf crown bar 4800da.jpg" alt="Crown Bar">
+        <span class="zoom-hint en">🔍 Zoom</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">Crown Bar Al Fakher 60K</p>
+        <p class="price">4,800 DA</p>
+        <p class="product-desc">E-Hose X – Authentic Shisha Taste. (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('Crown Bar Al Fakher 60K', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('Crown Bar Al Fakher 60K', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- R&M Tornado 15K -->
+    <div class="product">
+      <div class="product-img-wrapper" onclick="openZoom('peuf 15k 2500da.jpg')">
+        <img src="peuf 15k 2500da.jpg" alt="R&M 15K">
+        <span class="zoom-hint en">🔍 Zoom</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">R&M Tornado 15K</p>
+        <p class="price">2,500 DA</p>
+        <p class="product-desc">15,000 Puffs – Premium Quality. (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('R&M Tornado 15K', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('R&M Tornado 15K', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VELO Freezing Peppermint -->
+    <div class="product">
+      <div class="product-img-wrapper" onclick="openZoom('peuf velo 1400da.jpg')">
+        <img src="peuf velo 1400da.jpg" alt="VELO">
+        <span class="zoom-hint en">🔍 Zoom</span>
+      </div>
+      <div class="pbody">
+        <p class="product-name en">VELO Freezing Peppermint</p>
+        <p class="price">1,400 DA</p>
+        <p class="product-desc">Nicotine Pouches – Very Strong & Fresh. (Original)</p>
+        <div class="order-group">
+          <button class="btn-choice btn-detail" onclick="selectProduct('VELO Freezing Peppermint', 'DÉTAIL')">DÉTAIL</button>
+          <button class="btn-choice btn-gros" onclick="selectProduct('VELO Freezing Peppermint', 'GROS')">GROS</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Order Form -->
+<section class="section" id="orderForm">
+  <div class="form-card">
+    <div class="form-title en">📋 ORDER FORM / معلومات الطلب</div>
+    <form id="whatsappForm" onsubmit="sendWhatsAppOrder(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>الاسم الكامل / Name</label>
+          <input type="text" id="custName" class="form-control" placeholder="Nom complet" required>
+        </div>
+        <div class="form-group">
+          <label>رقم الهاتف / Phone</label>
+          <input type="tel" id="custPhone" class="form-control" placeholder="06XXXXXXXX" required>
+        </div>
+        <div class="form-group">
+          <label>الولاية / Wilaya</label>
+          <input type="text" id="custWilaya" class="form-control" placeholder="Béjaïa, Alger..." required>
+        </div>
+        <div class="form-group">
+          <label>نوع الطلب / Type</label>
+          <select id="custType" class="form-control">
+            <option value="DÉTAIL">DÉTAIL</option>
+            <option value="GROS">GROS</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>اسم المنتوج / Model</label>
+          <select id="custModel" class="form-control" required>
+            <option value="">-- Choisissez le modèle --</option>
+            <option value="RandM Pro Tornado 120K">RandM Pro Tornado 120K</option>
+            <option value="CUBA Nicotine Pouches">CUBA Nicotine Pouches</option>
+            <option value="JNR Lila Kiss 60K">JNR Lila Kiss 60K</option>
+            <option value="JNR Lion King 30K">JNR Lion King 30K</option>
+            <option value="Crown Bar Al Fakher 60K">Crown Bar Al Fakher 60K</option>
+            <option value="R&M Tornado 15K">R&M Tornado 15K</option>
+            <option value="VELO Freezing Peppermint">VELO Freezing Peppermint</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>الكمية / Quantity</label>
+          <input type="number" id="custQty" class="form-control" min="1" value="1" required>
+        </div>
+        <div class="form-group">
+          <label>النكهة / Flavor</label>
+          <input type="text" id="custFlavor" class="form-control" placeholder="Flavor Choice">
+        </div>
+      </div>
+      <button type="submit" class="whatsapp-main en" style="width:100%;margin-top:25px;justify-content:center">SEND TO WHATSAPP</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="en" style="font-weight:800;margin-bottom:10px">ZL PEUFS BEJAIA</div>
+  <div>© 2026 • Smoke Different • 0696369740 / 0797581675</div>
+</footer>
+
+<script>
+let currentSlideIndex = 0;
+const totalSlides = 4;
+
+function moveSlide(direction, event) {
+  event.stopPropagation();
+  currentSlideIndex = (currentSlideIndex + direction + totalSlides) % totalSlides;
+  updateSlider();
+}
+
+function currentSlide(index, event) {
+  event.stopPropagation();
+  currentSlideIndex = index;
+  updateSlider();
+}
+
+function updateSlider() {
+  const track = document.getElementById('cubaTrack');
+  const dots = document.querySelectorAll('#cubaDots .dot');
+  track.style.transform = `translateX(${currentSlideIndex * 25}%)`;
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === currentSlideIndex);
+  });
+}
+
+function dismissModal(){
+  document.getElementById('welcomeModal').classList.add('hide');
+}
+function openZoom(src){
+  document.getElementById('zoomedImg').src = src;
+  document.getElementById('zoomModal').style.display = 'flex';
+}
+function closeZoom(){
+  document.getElementById('zoomModal').style.display = 'none';
+}
+function selectProduct(model, type){
+  document.getElementById('custModel').value = model;
+  document.getElementById('custType').value = type;
+  document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
+}
+function sendWhatsAppOrder(e){
+  e.preventDefault();
+  const name = document.getElementById('custName').value;
+  const phone = document.getElementById('custPhone').value;
+  const wilaya = document.getElementById('custWilaya').value;
+  const type = document.getElementById('custType',).value;
+  const model = document.getElementById('custModel').value;
+  const qty = document.getElementById('custQty').value;
+  const flavor = document.getElementById('custFlavor').value || 'Default';
+  const msg = `*New Order - ZL PEUFS*%0A%0A👤 *Name:* ${name}%0A📞 *Phone:* ${phone}%0A📍 *Wilaya:* ${wilaya}%0A📦 *Type:* ${type}%0A💨 *Model:* ${model}%0A🔢 *Qty:* ${qty}%0A🍓 *Flavor:* ${flavor}`;
+  window.open(`https://wa.me/213696369740?text=${msg}`, '_blank');
+}
+</script>
+</body>
+</html>
